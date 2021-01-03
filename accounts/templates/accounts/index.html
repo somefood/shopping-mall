@@ -1,11 +1,60 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<!-- Menu -->
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="{% url 'accounts:login' %}">Home</a></li>
+            <li><a href="index.html">Home2</a></li>
+            <li><a href="index.html">Home3</a></li>
+        </ul>
+        <ul class="actions vertical">
+            <li><a href="{% url 'accounts:login' %}" class="button fit">Login</a></li>
+        </ul>
+    </nav>
 
-<div style="background-color: #CCEEFF">
-    <h4>
-        test
-    </h4>
-</div>
+<!-- Banner -->
+    <section id="banner">
+        <div class="content">
+            <h1>짜자잔</h1>
+            <p>내용 입력<br />내용입력하세요</p>
+            <ul class="actions">
+                <li><a href="#one" class="button scrolly">Get Started</a></li>
+            </ul>
+        </div>
+    </section>
+
+<!-- Product -->
+    <section id="three" class="wrapper">
+        <div class="inner flex flex-3">
+            <div class="flex-item box">
+                <div class="image fit">
+                    <img src="/static/images/IMG_0581.jpg" alt="" />
+                </div>
+                <div class="content">
+                    <h3>상품 1</h3>
+                    <p>내용을 입력하세요</p>
+                </div>
+            </div>
+            <div class="flex-item box">
+                <div class="image fit">
+                    <img src="/static/images/IMG_0557.jpg" alt="" />
+                </div>
+                <div class="content">
+                    <h3>상품 2</h3>
+                    <p>내용을 입력하세요</p>
+                </div>
+            </div>
+            <div class="flex-item box">
+                <div class="image fit">
+                    <img src="/static/images/IMG_0921.jpg" alt="" />
+                </div>
+                <div class="content">
+                    <h3>상품 3</h3>
+                    <p>내용을 입력하세요</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
 {% endblock %}

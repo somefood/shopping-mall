@@ -15,14 +15,6 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
-<<<<<<< HEAD
-from django.urls import path, include
-
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('accounts/', include('accounts.urls')),
-=======
 from django.shortcuts import get_list_or_404
 from django.urls import path, include
 from django.views.generic import TemplateView
@@ -40,8 +32,7 @@ class HomeView(TemplateView):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('product/', include('products.urls')),
-    path('', HomeView.as_view(), name='home')
->>>>>>> aa2626c14b943bbd8baa2642cc31882235a07adf
+    path('', HomeView.as_view(), name='home'),
 ]
 
 if settings.DEBUG == True:
