@@ -1,11 +1,67 @@
 {% extends 'base.html' %}
 {% block title %}메인페이지{% endblock %}
-{% block contents %}
-    <ul class="product-list">
-    {% for product in products %}
-        <li class="product-item">
-            <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-        </li>
-    {% endfor %}
-    </ul>
+
+{% block content %}
+<!-- Menu -->
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="index.html">Home2</a></li>
+            <li><a href="index.html">Home3</a></li>
+        </ul>
+        <ul class="actions vertical">
+            <li><a href="{% url 'accounts:login' %}" class="button fit">Login</a></li>
+        </ul>
+    </nav>
+
+<!-- Banner -->
+    <section id="banner">
+        <div class="content">
+            <h1>짜자잔</h1>
+            <p>내용 입력<br />내용입력하세요</p>
+            <ul class="actions">
+                <li><a href="#one" class="button scrolly">Get Started</a></li>
+            </ul>
+        </div>
+    </section>
+
+<!-- Product -->
+    <section id="three" class="wrapper">
+        <div class="inner flex flex-3">
+            {% for product in products %}
+                <div class="flex-item box">
+                    <div class="image fit">
+                        <img src="/static/images/IMG_0581.jpg" alt=""/>
+                    </div>
+                    <div class="content">
+                        <h3><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3>
+                        <p>내용을 입력하세요</p>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="flex-item box">
+
+
+            </div>
+            <div class="flex-item box">
+                <div class="image fit">
+                    <img src="/static/images/IMG_0557.jpg" alt="" />
+                </div>
+                <div class="content">
+                    <h3>상품 2</h3>
+                    <p>내용을 입력하세요</p>
+                </div>
+            </div>
+            <div class="flex-item box">
+                <div class="image fit">
+                    <img src="/static/images/IMG_0921.jpg" alt="" />
+                </div>
+                <div class="content">
+                    <h3>상품 3</h3>
+                    <p>내용을 입력하세요</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
 {% endblock %}
