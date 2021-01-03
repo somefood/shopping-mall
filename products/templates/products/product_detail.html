@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block contents %}
+    <div class="detail-area">
+        <div class="img-area">
+            사진 추가 예정
+        </div>
+        <div class="info-area">
+            <div class="product-name">
+                {{ product.name }}
+            </div>
+            <div class="product-info">
+                {{ product.description }}
+                {{ product.price|intcomma }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -8,6 +8,9 @@ class Category(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+    def get_absolute_url(self):
+        return reverse('products:category', args=[self.id])
+
     class Meta:
         verbose_name = '카테고리'
         verbose_name_plural = '카테고리'
@@ -23,7 +26,7 @@ class Product(models.Model):
         return f"{self.name}"
 
     def get_absolute_url(self):
-        return reverse('product:detail', args=[self.id])
+        return reverse('products:detail', args=[self.id])
 
     class Meta:
         verbose_name = '상품'
