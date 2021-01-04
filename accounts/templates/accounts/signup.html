@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 
 {% block content %}
-
-<div>
+{{ form.errors }}
+{{ profile_form.errors }}
+<div class="login-area">
     <form action="{% url 'accounts:signup' %}" method="POST">
         {% csrf_token %}
-        {{ form }}
+        {{ form.username|attr:"placeholder:아이디를 입력해주세요." }}
+        {{ form.password1|attr:"placeholder:비밀번호를 입력해주세요." }}
+        {{ form.password2|attr:"placeholder:비밀번호를 다시 입력해주세요." }}
+
+        {{ profile_form }}
         <input type="submit">
     </form>
 </div>

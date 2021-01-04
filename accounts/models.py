@@ -3,7 +3,7 @@ from django.conf import settings
 
 
 class Profile(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     nickname = models.CharField(max_length=50, verbose_name='닉네임')
     phone_number = models.CharField(max_length=11, verbose_name='전화번호')
     birth_day = models.CharField(max_length=8, verbose_name='생년월일')

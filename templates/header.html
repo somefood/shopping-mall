@@ -5,6 +5,11 @@
        </nav>
        <a href="{% url 'home' %}" class="logo">glry</a>
        <nav class="right">
-           <a href="{% url 'accounts:login' %}" class="button alt">Log in</a>
+           {% if user.is_active %}
+               {% firstof user.profile.nickname user.get_username %}님
+               <a href="{% url 'accounts:logout' %}" class="button alt">로그아웃</a>
+           {% else %}
+               <a href="{% url 'accounts:login' %}" class="button alt">로그인</a>
+           {% endif %}
        </nav>
    </header>
