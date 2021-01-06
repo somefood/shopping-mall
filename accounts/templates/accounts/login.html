@@ -1,15 +1,20 @@
 {% extends 'base.html' %}
-
+{% load widget_tweaks %}
 {% block content %}
 
 <div class="login-area">
     <h1>로그인</h1>
     <form action="" method="POST">
         {% csrf_token %}
-        {{ form }}
+        <label for="id_username">아이다</label>
+        {{ form.username|attr:"placeholder:아이디를 입력해주세요." }}
+        <label for="id_password">비밀번호:</label>
+        {{ form.password|attr:"placeholder:비밀번호를 입력해주세요." }}
         <input type="submit">
     </form>
     <a href="{% url 'accounts:signup' %}">회원가입</a>
+
+
 </div>
 
 {% endblock %}
