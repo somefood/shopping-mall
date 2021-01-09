@@ -8,6 +8,7 @@
            {% if user.is_active %}
                {% firstof user.profile.nickname user.get_username %}님
                <a href="{% url 'accounts:logout' %}" class="button alt">로그아웃</a>
+               <a href="{% url 'accounts:detail' pk=join_user.pk %}" class="button alt">Mypage</a>
            {% else %}
                <a href="{% url 'accounts:login' %}" class="button alt">로그인</a>
            {% endif %}

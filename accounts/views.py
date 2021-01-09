@@ -1,10 +1,13 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
+
 from .forms import ProfileForm
 # Create your views here.
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView, UpdateView
 
 
 class AccountSignupView(CreateView):
@@ -33,3 +36,20 @@ class AccountSignupView(CreateView):
         else:
             print(form2.errors)
             return self.render_to_response(self.get_context_data(form=form, profile_form=form2))
+
+
+
+class AccountDetailView(DetailView):
+    model = User
+    context_object_name = 'join_user'
+    template_name = 'accounts/detail.html'
+
+
+@method_decorator(login_required, 'get')
+@method_decorator(login_required, 'post')
+class AccountUpdateView(UpdateView):
+    model = User
+    form_class = UserCreationForm
+    context_object_name = 'join_user'
+    success_url = reverse_lazy('accounts:update')
+    template_name = 'accounts/update.html'
