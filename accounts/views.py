@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 
+from .decorators import account_required
 from .forms import ProfileForm
 # Create your views here.
 from django.urls import reverse_lazy
@@ -53,3 +54,9 @@ class AccountUpdateView(UpdateView):
     context_object_name = 'join_user'
     success_url = reverse_lazy('accounts:update')
     template_name = 'accounts/update.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if 'profile_form' not in kwargs:
+            context['profile_form'] = ProfileForm
+        return context
