@@ -12,7 +12,7 @@
           </h2>
 
           {% if join_user == user %}
-          <a href="{% url 'accounts:update' pk=join_user.pk %}">
+          <a href="{% url 'accounts:update' join_user.pk %}">
               <p>회원정보 수정</p>
           </a>
           {% endif %}
