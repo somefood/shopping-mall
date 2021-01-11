@@ -3,7 +3,21 @@
        <nav class="left">
            <a href="#menu"><span>Menu</span></a>
        </nav>
+
+       <nav id="menu">
+            <ul class="links">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                {% for category in categories %}
+                   <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+            <ul class="actions vertical">
+                <li><a href="{% url 'accounts:login' %}" class="button fit">Login</a></li>
+            </ul>
+        </nav>
+
        <a href="{% url 'home' %}" class="logo">glry</a>
+
        <nav class="right">
            {% if user.is_active %}
                {% firstof user.profile.nickname user.get_username %}님

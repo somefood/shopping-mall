@@ -21,6 +21,7 @@ class Product(models.Model):
     name = models.CharField(max_length=50, verbose_name='이름')
     description = models.TextField(verbose_name='설명')
     price = models.PositiveIntegerField(default=0, verbose_name='가격')
+    thumbnail = models.ImageField(upload_to='images/', blank=True, null=True, verbose_name='대표이미지')
 
     def __str__(self):
         return f"{self.name}"
@@ -33,3 +34,6 @@ class Product(models.Model):
         verbose_name_plural = '상품'
 
 
+class Photo(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
+    image = models.ImageField(upload_to='images/', blank=True, null=True, verbose_name='연관 이미지')

@@ -6,7 +6,7 @@ from django.views.generic import ListView, DetailView
 
 class ProductListView(ListView):
     model = Product
-    context_object_name = 'products'
+    context_object_name = 'product_list'
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -21,4 +21,9 @@ class ProductListView(ListView):
 
 class ProductDetailView(DetailView):
     model = Product
-    context_object_name = 'product'
+    context_object_name = 'product_detail'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['categories'] = get_list_or_404(Category)
+        return context

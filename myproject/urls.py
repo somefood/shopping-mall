@@ -18,7 +18,8 @@ from django.contrib import admin
 from django.shortcuts import get_list_or_404
 from django.urls import path, include
 from django.views.generic import TemplateView
-from products.models import Product
+from products.models import Product, Category
+from django.conf.urls.static import static
 
 
 class HomeView(TemplateView):
@@ -27,6 +28,7 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['products'] = get_list_or_404(Product)
+        context['categories'] = get_list_or_404(Category)
         return context
 
 urlpatterns = [
@@ -34,7 +36,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('product/', include('products.urls')),
     path('', HomeView.as_view(), name='home'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG == True:
     import debug_toolbar
