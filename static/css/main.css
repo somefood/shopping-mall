@@ -2616,7 +2616,7 @@
 /* Wrapper */
 
 	.wrapper {
-		padding: 6em 0 4em 0;
+		padding: 2em 0 2em 0;
 	}
 
 		.wrapper h1, .wrapper h2, .wrapper h3, .wrapper h4, .wrapper h5 {
@@ -2911,7 +2911,6 @@
 		}
 
 /* Banner */
-/* Banner */
 
 	.banner {
 		background-color: #fff;
@@ -2970,7 +2969,7 @@
 			-webkit-transition: opacity 1.5s ease-in-out, visibility 1.5s;
 			-ms-transition: opacity 1.5s ease-in-out, visibility 1.5s;
 			transition: opacity 1.5s ease-in-out, visibility 1.5s;
-			background: #000000;
+			background: #f7f7f7;
 			content: '';
 			display: block;
 			height: 100%;
