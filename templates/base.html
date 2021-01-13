@@ -5,22 +5,23 @@
 
 {% include 'head.html' %}
 
-<body>
-   {% include 'header.html' %}
+   <body>
+      {% include 'header.html' %}
 
-<!-- Menu -->
+   <!-- Menu -->
 
-   {% block content %}
+      {% block content %}
 
-   {% endblock %}
+      {% endblock %}
 
-   {% include 'footer.html' %}
+      {% include 'footer.html' %}
 
-<script src="{% static 'js/scripts.js' %}"></script>
-<script src="{% static 'js/jquery.min.js' %}"></script>
-<script src="{% static 'js/jquery.scrolly.min.js' %}"></script>
-<script src="{% static 'js/skel.min.js' %}"></script>
-<script src="{% static 'js/util.js' %}"></script>
-<script src="{% static 'js/main.js' %}"></script>
-</body>
+   <script src="{% static 'js/scripts.js' %}"></script>
+   <script src="{% static 'js/jquery.min.js' %}"></script>
+   <script src="{% static 'js/jquery.scrolly.min.js' %}"></script>
+   <script src="{% static 'js/jquery.scrollex.min.js' %}"></script>
+   <script src="{% static 'js/skel.min.js' %}"></script>
+   <script src="{% static 'js/util.js' %}"></script>
+   <script src="{% static 'js/main.js' %}"></script>
+   </body>
 </html>
