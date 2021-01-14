@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+    {{ selected_category.name }}
     <div>
         카테고리 목록
         {% for category in categories %}
