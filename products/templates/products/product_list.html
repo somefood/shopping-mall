@@ -1,14 +1,54 @@
 {% extends 'base.html' %}
 {% block content %}
     <div>
-        카테고리 목록
-        {% for category in categories %}
-            <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
-        {% endfor %}
+        카테고리 목록{{  }}<br>
     </div>
+
+
+<!-- Product List -->
     <div>
-        {% for product in products %}
+
+        {% for product in product_list %}
             <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
         {% endfor %}
     </div>
+
+
+    <section id="three" class="wrapper">
+        <div class="inner" style="width:80%">
+            <h2 id="content_2" style="color:#000000">{{ product_list.category }}</h2>
+        </div>
+        <div class="inner flex flex-3" style="width:80%">
+            {% for product in product_list %}
+                <div class="flex-item box">
+                    <div class="image fit">
+                        <a href="{{ product.get_absolute_url }}"><img src="media/{{ product.thumbnail }}" alt=""/>{{ product.thumbnail }}</a>
+                    </div>
+                    <div class="content">
+                        <h3 style="color:#727a82">
+                            <a href="{{ product.get_absolute_url }}">{{ product }}</a>
+                        </h3>
+                        <p align="right">￦{{ product.price }} / {{ product.description }} /  {{ product.category }} </p>
+                    </div>
+                </div>
+
+                {% if forloop.counter|divisibleby:"3" %}
+                    </div>
+                <div class="inner flex flex-3" style="width:80%">
+                {% endif %}
+
+                {% if forloop.last %}
+                    {% if not forloop.counter|divisibleby:"3" %}
+                        {% if forloop.counter|divisibleby:"2" %}
+                            <div class="flex-item box" style="border:0px"> </div>
+                            <div class="flex-item box" style="border:0px"> </div>
+                        {% else %}
+                            <div class="flex-item box" style="border:0px"> </div>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}
