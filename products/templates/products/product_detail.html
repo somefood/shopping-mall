@@ -16,6 +16,7 @@
                 {{ product.price|intcomma }}
             </div>
         </div>
+        <a href="{% url 'carts:add_cart' product.pk %}">Add to Cart</a>
     </div>
 
 {% endblock %}
