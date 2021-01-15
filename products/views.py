@@ -26,12 +26,6 @@ class ProductListView(ListView):
             self.queryset = Product.objects.filter(category=kwargs['pk'])
         return super().get(request, *args, **kwargs)
 
-    def detail(self, name):
-        category_id = Category.objects.get(id=name)
-        context = {'category_id': category_id}
-        return render(self, 'products/product_list.html', context)
-
-
 class ProductDetailView(DetailView):
     model = Product
     context_object_name = 'product_detail'

@@ -2,20 +2,74 @@
 {% load humanize %}
 
 {% block content %}
-    <div class="detail-area">
-        <div class="img-area">
-            사진 추가 예정
-                {{ product.name }} / {{ product.category }}
-        </div>
-        <div class="info-area">
-            <div class="product-name">
-                {{ product.name }}
+
+<style>
+    .custombutton {
+		-moz-appearance: none;		-webkit-appearance: none;		-ms-appearance: none;		appearance: none;
+		-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		background-color: transparent;
+        box-shadow: inset 0 0 0 1px #dee1e3;
+		border-radius: 4px;
+		border: 0;
+		cursor: pointer;
+		display: inline-block;
+		height: 3.5em;
+		line-height: 3.5em;
+		padding: 0 2.5em;
+		text-align: center;
+		text-decoration: none;
+		white-space: nowrap;
+		text-transform: uppercase;
+        margin: 0 0 1em 0;
+	}
+
+</style>
+
+<!-- Product Image, Price 영역 -->
+    <section class="wrapper">
+        <div class="inner" style="width:70%">
+            <div class="row uniform">
+                <div class="7u 12u$(small)">
+                    <div class="flex-item image fit">
+                        <img src="{{ product_detail.thumbnail.url }}" alt="" />
+                    </div>
+                </div>
+                <div class="5u$ 12u$(small)">
+                    <div class="flex-item box" style="margin:0;">
+                        <div class="content">
+                            <div id="name">
+                                <h2 style="color:#000000">{{ product_detail.name }}</h2>
+                            </div>
+                            <div id="price">
+                                <p style="font-size: 1.5em; color:#6F7E91;">25%</p>
+                                <p style="font-size: 1.5em; color:#6F7E91; align:right;">{{ product_detail.price }}</p>
+                            </div>
+                            <div id="option" style="margin:0 0 1em 0;">
+                                <input type="text" name="count" value="1" style="width:50%; align:right;"/>
+                            </div>
+                            <div id="like" style="width:100%">
+                                <a href="#" class="custombutton">
+                                    <strong>찜하기</strong>
+                                </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="#" class="custombutton">
+                                    <strong>장바구니</strong>
+                                </a>
+                            </div>
+                            <div id="order">
+                                <a href="#" class="custombutton" style="width:100%; background-color:#f6755e;">
+                                    <strong style="color:#ffffff;">주문하기</strong>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="product-info">
-                {{ product.description }}
-                {{ product.price|intcomma }}
-            </div>
         </div>
-    </div>
+    </section>
+
+
 
 {% endblock %}

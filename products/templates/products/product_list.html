@@ -1,35 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
-    {{ selected_category.name }}
-    <div>
-        카테고리 목록{{ category_id }}<br>
-    </div>
 
-
-<!-- Product List -->
-    <div>
-
-        {% for product in product_list %}
-            <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-        {% endfor %}
-    </div>
-
+<!-- New Product -->
 
     <section id="three" class="wrapper">
         <div class="inner" style="width:80%">
-            <h2 id="content_2" style="color:#000000">{{ product_list.category }}</h2>
+            <h2 id="content" style="color:#000000">{{ selected_category.name }}</h2>
         </div>
         <div class="inner flex flex-3" style="width:80%">
             {% for product in product_list %}
                 <div class="flex-item box">
                     <div class="image fit">
-                        <a href="{{ product.get_absolute_url }}"><img src="media/{{ product.thumbnail }}" alt=""/>{{ product.thumbnail }}</a>
+                        <a href="{{ product.get_absolute_url }}">
+                            <img src="{{ product.thumbnail.url }}" alt="{{ product.name }} 상품 이미지"/>
+                        </a>
                     </div>
                     <div class="content">
                         <h3 style="color:#727a82">
-                            <a href="{{ product.get_absolute_url }}">{{ product }}</a>
+                            <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
                         </h3>
-                        <p align="right">￦{{ product.price }} / {{ product.description }} /  {{ product.category }} </p>
+                        <p align="right">￦{{ product.price }}</p>
                     </div>
                 </div>
 
@@ -52,4 +42,6 @@
             {% endfor %}
         </div>
     </section>
+
+
 {% endblock %}
