@@ -3253,7 +3253,7 @@
 		@media screen and (max-width: 980px) {
 
 			#one .image.fit {
-				margin: 0 auto 2em auto;
+				margin: 0 auto auto auto;
 				max-width: 60%;
 			}
 

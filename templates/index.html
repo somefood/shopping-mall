@@ -31,7 +31,9 @@
             {% for product in products|slice:3 %}
                 <div class="flex-item box">
                     <div class="image fit">
-                        <a href="{{ product.get_absolute_url }}"><img src="media/{{ product.thumbnail }}" alt=""/></a>
+                        <a href="{{ product.get_absolute_url }}">
+                            <img src="media/{{ product.thumbnail }}" alt="{{ product.name }} 상품 이미지"/>
+                        </a>
                     </div>
                     <div class="content">
                         <h3 style="color:#727a82">
@@ -72,7 +74,9 @@
             {% for product in products|slice:3 %}
                 <div class="flex-item box">
                     <div class="image fit">
-                        <a href="{{ product.get_absolute_url }}"><img src="media/{{ product.thumbnail }}" alt=""/></a>
+                        <a href="{{ product.get_absolute_url }}">
+                            <img src="media/{{ product.thumbnail }}" alt="{{ product.name }} 상품 이미지"/>
+                        </a>
                     </div>
                     <div class="content">
                         <h3 style="color:#727a82">
