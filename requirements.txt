@@ -3,3 +3,4 @@ django-debug-toolbar==3.2
 django-widget-tweaks==1.4.8
 Pillow==8.1.0
 django-carton
+django-summernote==0.8.11.6
