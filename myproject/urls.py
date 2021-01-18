@@ -36,6 +36,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('product/', include('products.urls')),
     path('', HomeView.as_view(), name='home'),
+    path('summernote/', include('django_summernote.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG == True:

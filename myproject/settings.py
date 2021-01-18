@@ -61,6 +61,7 @@ INSTALLED_APPS += [
     'debug_toolbar',
     'django.contrib.humanize',
     'widget_tweaks',
+    'django_summernote'
 ]
 
 INSTALLED_APPS += [
@@ -76,7 +77,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'django.middleware.clickjacking.XFrameOptionsMiddleware', #summer-note 사용하려면 막아야함
 ]
 
 ROOT_URLCONF = 'myproject.urls'
