@@ -28,7 +28,7 @@ class ProductListView(ListView):
 
 class ProductDetailView(DetailView):
     model = Product
-    context_object_name = 'product_detail'
+    context_object_name = 'product'
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)

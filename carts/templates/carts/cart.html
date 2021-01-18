@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    {% if not cart_items %}
+        <div>test</div>
+    {% else %}
+        <div>
+            {% for cart_item in cart_items %}
+                <a href="{{ cart_item.product.get_absolute_url }}">{{ cart_item.product.name }}</a>
+                {{ cart_item.product.price }}
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
