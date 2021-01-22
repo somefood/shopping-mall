@@ -1,48 +1,41 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.http import require_POST
 from products.models import Product
-from .models import Cart, CartItem
-from django.core.exceptions import ObjectDoesNotExist
+from .forms import AddProductForm
+from .cart import Cart
 
 
-def _cart_id(request):
-    cart = request.session.session_key
-    if not cart:
-        cart = request.session.create()
-    return cart
+@require_POST # 어노테이션(데코레이터)
+def add(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+
+    form = AddProductForm(request.POST)
+
+    if form.is_valid():
+        cd = form.cleaned_data
+        print(cd['is_update'])
+        cart.add(product=product, quantity=cd['quantity'],
+                 is_update=cd['is_update'])
+
+        return redirect('carts:detail')
 
 
-def add_cart(request, product_id):
-    product = Product.objects.get(id=product_id)
-    try:
-        cart = Cart.objects.get(cart_id=_cart_id(request))
-    except Cart.DoesNotExist:
-        cart = Cart.objects.create(
-            cart_id=_cart_id(request)
-        )
-        cart.save()
-
-    try:
-        cart_item = CartItem.objects.get(product=product, cart=cart)
-        cart_item.quantity += 1
-        cart_item.save()
-    except CartItem.DoesNotExist:
-        cart_item = CartItem.objects.create(
-            product=product,
-            quantity=1,
-            cart=cart
-        )
-        cart_item.save()
-    return redirect('carts:cart_detail')
+def remove(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    cart.remove(product)
+    return redirect('carts:detail')
 
 
-def cart_detail(request, total=0, counter=0, cart_items=None):
-    try:
-        cart = Cart.objects.get(cart_id=_cart_id(request))
-        cart_items = CartItem.objects.filter(cart=cart, active=True)
-        for cart_item in cart_items:
-            total += (cart_item.product.price * cart_item.quantity)
-            counter += cart_item.quantity
-    except ObjectDoesNotExist:
-        pass
+def detail(request):
+    cart = Cart(request)
+    for product in cart:
+        # 디테일란에서 수량 변경 시
+        product['quantity_form'] = AddProductForm(initial={
+            'quantity': product['quantity'], 'is_update': True
+        })
 
-    return render(request, 'carts/cart.html', dict(cart_items=cart_items, total=total, counter=counter))
+    return render(request, 'carts/detail.html', {
+        'carts': cart,
+    })

@@ -2,6 +2,7 @@ from django.db import models
 from products.models import Product
 
 
+# 지금은 필요없음
 class Cart(models.Model):
     cart_id = models.CharField(max_length=250, blank=True)
     created_at = models.DateField(auto_now_add=True)

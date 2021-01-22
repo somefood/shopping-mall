@@ -34,29 +34,29 @@
             <div class="row uniform">
                 <div class="7u 12u$(small)">
                     <div class="flex-item image fit">
-                        <img src="{{ product_detail.thumbnail.url }}" alt="" />
+                        <img src="{{ product.thumbnail.url }}" alt="" />
                     </div>
                 </div>
                 <div class="5u$ 12u$(small)">
                     <div class="flex-item box" style="margin:0;">
                         <div class="content">
                             <div id="name">
-                                <h2 style="color:#000000">{{ product_detail.name }}</h2>
+                                <h2 style="color:#000000">{{ product.name }}</h2>
                             </div>
                             <div id="price">
                                 <p style="font-size: 1.5em; color:#6F7E91;">25%</p>
-                                <p style="font-size: 1.5em; color:#6F7E91; align:right;">{{ product_detail.price }}</p>
+                                <p style="font-size: 1.5em; color:#6F7E91; align:right;">{{ product.price }}</p>
                             </div>
                             <div id="option" style="margin:0 0 1em 0;">
-                                <input type="text" name="count" value="1" style="width:50%; align:right;"/>
+                                <input type="text" name="count" value="1" style="width:50%; align:right;" class="prod-quantity"/>
                             </div>
                             <div id="like" style="width:100%">
                                 <a href="#" class="custombutton">
                                     <strong>찜하기</strong>
                                 </a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a href="#" class="custombutton">
+                                <button id="add_cart" class="custombutton">
                                     <strong>장바구니</strong>
-                                </a>
+                                </button>
                             </div>
                             <div id="order">
                                 <a href="#" class="custombutton" style="width:100%; background-color:#f6755e;">
@@ -73,9 +73,29 @@
 
     <section class="wrapper">
         <div class="inner" style="width:70%">
-            {{ product_detail.description | safe }}
+            {{ product.description | safe }}
         </div>
     </section>
 
 
+{% endblock %}
+{% block scripts %}
+    <script>
+        var cart_url = "{% url 'carts:product_add' product.pk %}";
+        var csrf_token = "{{ csrf_token }}";
+    </script>
+    <script>
+        $('#add_cart').on('click', function(e){
+            e.preventDefault();
+            var prod_quantity = $('.prod-quantity').val();
+            var newForm = $('<form></form>');
+            newForm.attr("method", "post");
+            newForm.attr("action", cart_url);
+
+            newForm.append($('<input/>', {type: 'hidden', name: 'csrfmiddlewaretoken', val: csrf_token}));
+            newForm.append($('<input/>', {type: 'hidden', name: 'quantity', val: prod_quantity}));
+            newForm.appendTo('body');
+            newForm.submit();
+        })
+    </script>
 {% endblock %}

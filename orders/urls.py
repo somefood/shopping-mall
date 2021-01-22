@@ -3,6 +3,6 @@ from . import views
 
 app_name = 'orders'
 
-urlpattenrs = [
-
+urlpatterns = [
+    path('form_test/', views.OrderFormView.as_view(), name='test'),
 ]

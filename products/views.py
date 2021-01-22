@@ -16,8 +16,10 @@ class ProductListView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['categories'] = get_list_or_404(Category)
-        context['selected_category'] = self.selected_category
+        try:
+            context['selected_category'] = self.selected_category
+        except AttributeError:
+            context['selected_category'] = ''
         return context
 
     def get(self, request, *args, **kwargs):
@@ -26,11 +28,11 @@ class ProductListView(ListView):
             self.queryset = Product.objects.filter(category=kwargs['pk'])
         return super().get(request, *args, **kwargs)
 
+
 class ProductDetailView(DetailView):
     model = Product
     context_object_name = 'product'
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['categories'] = get_list_or_404(Category)
         return context

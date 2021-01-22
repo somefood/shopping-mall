@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load product_extras %}
 {% block content %}
 
 <!-- New Product -->
 
     <section id="three" class="wrapper">
         <div class="inner" style="width:80%">
-            <h2 id="content" style="color:#000000">{{ selected_category.name }}</h2>
+            <h2 id="content" style="color:#000000">{{ selected_category|is_category }}</h2>
         </div>
         <div class="inner flex flex-3" style="width:80%">
             {% for product in product_list %}
