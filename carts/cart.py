@@ -73,3 +73,6 @@ class Cart:
 
     def get_total_price(self):
         return self.get_product_total() - self.get_discount_total()
+
+    def get_total_quantity(self):
+        return sum([item['quantity'] for item in self.cart.values()])
