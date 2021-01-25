@@ -32,6 +32,7 @@ class HomeView(TemplateView):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
     path('accounts/', include('accounts.urls')),
     path('product/', include('products.urls')),
     path('carts/', include('carts.urls')),
