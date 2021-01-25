@@ -59,9 +59,9 @@
                                 </button>
                             </div>
                             <div id="order">
-                                <a href="#" class="custombutton" style="width:100%; background-color:#f6755e;">
+                                <button id="order_item" href="#" class="custombutton" style="width:100%; background-color:#f6755e;">
                                     <strong style="color:#ffffff;">주문하기</strong>
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -81,21 +81,70 @@
 {% endblock %}
 {% block scripts %}
     <script>
+        var product_id = "{{ product.pk }}"
         var cart_url = "{% url 'carts:product_add' product.pk %}";
+        var cart_success_url = "{% url 'carts:detail' %}";
+        var order_create_url = "{% url 'orders:order_create' %};
         var csrf_token = "{{ csrf_token }}";
     </script>
     <script>
-        $('#add_cart').on('click', function(e){
+        function add_cart_func(e) {
+            e.preventDefault();
+            var result;
+            var prod_quantity = $('.prod-quantity').val();
+            var data = {
+                "csrfmiddlewaretoken": csrf_token,
+                "quantity": prod_quantity
+            };
+            $.ajax({
+                type: "POST",
+                url: cart_url,
+                data: data,
+                async: false,
+                success: function(res) {
+                    result = res
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
+            return result
+        }
+
+        function order(e){
             e.preventDefault();
             var prod_quantity = $('.prod-quantity').val();
-            var newForm = $('<form></form>');
-            newForm.attr("method", "post");
-            newForm.attr("action", cart_url);
+            var data = {
+                "csrfmiddlewaretoken": csrf_token,
+                "quantity": prod_quantity,
+                "product_id": product_id,
+            };
+            $.ajax({
+                type: "POST",
+                url: order_create_url,
+                data: data,
+                async: false,
+                success: function(res) {
+                    result = res
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
+        }
 
-            newForm.append($('<input/>', {type: 'hidden', name: 'csrfmiddlewaretoken', val: csrf_token}));
-            newForm.append($('<input/>', {type: 'hidden', name: 'quantity', val: prod_quantity}));
-            newForm.appendTo('body');
-            newForm.submit();
-        })
+        $('#add_cart').on('click', function(e){
+            var result = add_cart_func(e);
+            if(result['success']) {
+                $(location).attr('href', cart_success_url);
+            }
+        });
+
+        $('#order_item').on('click', function(e){
+            var result = add_cart_func(e);
+            if (result['success']) {
+
+            }
+        });
     </script>
 {% endblock %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from products.models import Product
+from django.http import JsonResponse
 from .forms import AddProductForm
 from .cart import Cart
 
@@ -17,8 +18,8 @@ def add(request, product_id):
         print(cd['is_update'])
         cart.add(product=product, quantity=cd['quantity'],
                  is_update=cd['is_update'])
-
-        return redirect('carts:detail')
+        return JsonResponse({'success': True})
+        # return redirect('carts:detail')
 
 
 def remove(request, product_id):

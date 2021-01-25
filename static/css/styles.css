@@ -35,3 +35,11 @@
     width: 50%;
     margin: 0 auto;
 }
+
+.cart-table {
+    width: 900px;
+    margin: 0 auto;
+}
+.cart-table tbody img {
+    width: 100%;
+}
