@@ -28,7 +28,7 @@
                 </th>
                 <td>{{ product.name }}</td>
                 <td>
-                    <form action="{% url "carts:product_add" product.id %}" method="post">
+                    <form action="{% url "carts:product_add" product.id %}" method="post" class="update-cart">
                         {% csrf_token %}
                         {{ item.quantity_form.quantity }}
                         {{ item.quantity_form.is_update }}
@@ -71,6 +71,32 @@
 
     <p class="text-right">
         <a href='{% url "products:all_list" %}' class="btn btn-secondary">쇼핑 계속하기</a>
-{#        <a href='{% url "orders:order_create" %}' class="btn btn-primary">Checkout</a>#}
+        <a href='{% url "orders:order_create" %}' class="btn btn-primary">Checkout</a>
     </p>
+{% endblock %}
+{% block scripts %}
+    <script>
+    $('.update-cart').on('submit', function(e){
+        e.preventDefault();
+        var data = $(e.target).serialize();
+        var cart_url = $(e.target).attr('action');
+        var result;
+        $.ajax({
+                type: "POST",
+                url: cart_url,
+                data: data,
+                async: false,
+                success: function(res) {
+                    result = res
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
+        if (result){
+            console.log('변경되었습니다.');
+            location.reload();
+        }
+    })
+    </script>
 {% endblock %}

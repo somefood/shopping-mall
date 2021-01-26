@@ -2,7 +2,12 @@ from django import forms
 from .models import Order
 
 
-class OrderForm(forms.ModelForm):
+class OrderCreateForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = '__all__'
+        fields = ['postal_code',
+                  'address',
+                  'detail_address',
+                  'extra_address',
+                  'phone_number',
+                  ]

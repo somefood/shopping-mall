@@ -84,7 +84,7 @@
         var product_id = "{{ product.pk }}"
         var cart_url = "{% url 'carts:product_add' product.pk %}";
         var cart_success_url = "{% url 'carts:detail' %}";
-        var order_create_url = "{% url 'orders:order_create' %};
+        var order_create_url = "{% url 'orders:order_create' %}";
         var csrf_token = "{{ csrf_token }}";
     </script>
     <script>
@@ -111,39 +111,17 @@
             return result
         }
 
-        function order(e){
-            e.preventDefault();
-            var prod_quantity = $('.prod-quantity').val();
-            var data = {
-                "csrfmiddlewaretoken": csrf_token,
-                "quantity": prod_quantity,
-                "product_id": product_id,
-            };
-            $.ajax({
-                type: "POST",
-                url: order_create_url,
-                data: data,
-                async: false,
-                success: function(res) {
-                    result = res
-                },
-                error: function(err){
-                    console.log(err);
-                }
-            });
-        }
-
         $('#add_cart').on('click', function(e){
             var result = add_cart_func(e);
             if(result['success']) {
-                $(location).attr('href', cart_success_url);
+                console.log('장바구니에 추가되었습니다');
             }
         });
 
         $('#order_item').on('click', function(e){
             var result = add_cart_func(e);
             if (result['success']) {
-
+                $(location).attr('href', cart_success_url);
             }
         });
     </script>

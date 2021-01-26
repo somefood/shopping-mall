@@ -1,0 +1,23 @@
+{#{% for item in carts %}#}
+{#    {% with product=item.product %}#}
+        <tr>
+            <th scope="row">
+{#                <a href="{{ product.get_absolute_url }}">#}
+{#                    <img src="{{ product.thumbnail.url }}" class="img-thumbnail">#}
+{#                </a>#}
+            </th>
+{#            <td>{{ product.name }}</td>#}
+            <td>
+{#                <form action="{% url "carts:product_modify" product.id %}" method="post" class="update-cart">#}
+{#                    {% csrf_token %}#}
+{#                    {{ item.quantity_form.quantity }}#}
+{#                    {{ item.quantity_form.is_update }}#}
+{#                    <input type="submit" class="btn btn-primary" value="수정">#}
+{#                </form>#}
+            </td>
+{#            <td><a href="{% url "carts:product_remove" product.id %}">삭제</a></td>#}
+{#            <td class="num">{{ item.price }}</td>#}
+{#            <td class="num">{{ item.total_price }}원</td>#}
+        </tr>
+{#    {% endwith %}#}
+{#{% endfor %}#}
