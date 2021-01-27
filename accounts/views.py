@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
-
+from orders.models import Order
 from .decorators import account_required
 from .forms import ProfileForm
 # Create your views here.
@@ -39,11 +39,16 @@ class AccountSignupView(CreateView):
             return self.render_to_response(self.get_context_data(form=form, profile_form=form2))
 
 
-
 class AccountDetailView(DetailView):
     model = User
     context_object_name = 'join_user'
     template_name = 'accounts/detail.html'
+
+    def get_context_data(self, **kwargs):
+        user = self.get_object()
+        context = super().get_context_data(**kwargs)
+        context['paid_orders'] = Order.objects.filter(user=user, paid=True)
+        return context
 
 
 @method_decorator(login_required, 'get')

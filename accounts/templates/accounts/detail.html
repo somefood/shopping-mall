@@ -16,6 +16,16 @@
               <p>회원정보 수정</p>
           </a>
           {% endif %}
+          {% for order in paid_orders %}
+              {% for transaction in order.ordertransaction_set.all %}
+                  {{ transaction.transaction_id }}
+              {% endfor %}
+              {% for item in order.items.all %}
+                  {{ item.product.name }}
+                  {{ item.product.price }}
+                  {{ item.quantity }}
+              {% endfor %}
+          {% endfor %}
       </div>
   </div>
 {% endblock %}

@@ -14,7 +14,6 @@ def get_token():
 
     # 응답코드가 0이면 access_token 가져오기
     if access_res['code'] == 0:
-        print(access_res['response']['access_token'])
         return access_res['response']['access_token']
     else:
         return None
@@ -28,7 +27,7 @@ def payments_prepare(order_id, amount, *args, **kwargs):
             'merchant_uid': order_id,
             'amount': amount
         }
-        url = "https://api/iamport/kr/payments/prepare"
+        url = "https://api.iamport.kr/payments/prepare"
         headers = {
             "Authorization": access_token
         }

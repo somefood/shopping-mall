@@ -11,7 +11,9 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Order(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name='orders')
+    name = models.CharField(max_length=20, verbose_name='이름')
+    email = models.EmailField(verbose_name='이메일')
     postal_code = models.CharField(max_length=20, verbose_name='우편번호')
     address = models.CharField(max_length=100, verbose_name='주소')
     detail_address = models.CharField(max_length=100, verbose_name='상세주소')
